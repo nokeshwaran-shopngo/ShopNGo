@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopNGo - Your Online Store</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+        header {
+            background-color: #2874f0;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        nav {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: white;
+            padding: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        nav a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            padding: 10px 15px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+        }
+        .product {
+            background: white;
+            padding: 15px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 250px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .product:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .product h3 {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+        .product p {
+            color: green;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .rating {
+            color: #f39c12;
+            font-size: 14px;
+        }
+        .reviews {
+            font-size: 12px;
+            color: #555;
+            margin-top: 5px;
+        }
+        .description {
+            font-size: 14px;
+            color: #333;
+            margin-top: 10px;
+        }
+        .buy-btn {
+            background: #ff9f00;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .buy-btn:hover {
+            background: #fb641b;
+        }
+        .search-bar {
+            width: 50%;
+            padding: 10px;
+            margin: 10px auto;
+            display: block;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <header>ShopNGo - Best Deals Everyday!</header>
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Categories</a>
+        <a href="#">Cart</a>
+        <a href="#">Login</a>
+        <input type="text" class="search-bar" placeholder="Search for products...">
+    </nav>
+    <div class="container" id="product-container"></div>
+    
+    <script>
+        const products = [
+            { name: "Smartphone", price: "₹14,999", img: "https://source.unsplash.com/250x250/?smartphone", rating: "4.5", reviews: 320, description: "Latest smartphone with powerful performance." },
+            { name: "Laptop", price: "₹54,999", img: "https://source.unsplash.com/250x250/?laptop", rating: "4.7", reviews: 210, description: "High-performance laptop for professionals." },
+            { name: "Headphones", price: "₹2,499", img: "https://source.unsplash.com/250x250/?headphones", rating: "4.3", reviews: 150, description: "Wireless headphones with noise cancellation." },
+            { name: "Smartwatch", price: "₹4,999", img: "https://source.unsplash.com/250x250/?smartwatch", rating: "4.6", reviews: 180, description: "Feature-packed smartwatch for fitness tracking." },
+            { name: "Camera", price: "₹39,999", img: "https://source.unsplash.com/250x250/?camera", rating: "4.8", reviews: 90, description: "Professional camera with excellent image quality." }
+        ];
+        
+        const container = document.getElementById("product-container");
+
+        function displayProducts(filter = "") {
+            container.innerHTML = "";
+            products.filter(product => product.name.toLowerCase().includes(filter.toLowerCase()))
+            .forEach(product => {
+                const productDiv = document.createElement("div");
+                productDiv.className = "product";
+                productDiv.innerHTML = `
+                    <img src="${product.img}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>${product.price}</p>
+                    <div class="rating">⭐ ${product.rating} (${product.reviews} reviews)</div>
+                    <p class="description">${product.description}</p>
+                    <button class="buy-btn">Buy Now</button>
+                `;
+                container.appendChild(productDiv);
+            });
+        }
+        
+        document.querySelector(".search-bar").addEventListener("input", (e) => {
+            displayProducts(e.target.value);
+        });
+        
+        displayProducts();
+    </script>
+</body>
+</html>
